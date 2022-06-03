@@ -1,0 +1,74 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution 
+{       static int leftar[]=new int[1024];
+         static int rightar[]=new int[1024];
+    public static void main(String args[])
+     {
+         Scanner s=new Scanner(System.in);
+         int n=s.nextInt();
+          
+         for(int i=1;i<=n;i++)
+         {
+              leftar[i]=s.nextInt();
+            rightar[i]=s.nextInt();
+             
+         }
+      int t=s.nextInt();
+      while(t>0)
+      {
+         int k=s.nextInt();
+         swaping(1,k); 
+         inorder(1);
+         System.out.println();
+         t--;
+      }
+      
+     }
+     static void inorder(int root)
+     {
+         if(root==-1)
+         return;
+         inorder(leftar[root]);
+         System.out.print(root+" ");
+         inorder(rightar[root]);
+     }
+    static void swaping(int root,int k)
+    {
+        Queue<Integer> q=new LinkedList<>();
+         q.add(root);
+         int level=0;
+         while(!q.isEmpty())
+         {
+             level++;
+             int count=q.size();
+              while(count>0)
+              {
+                   int p=q.remove();
+               if(level%k==0)
+               {
+                   swap(leftar[p],rightar[p]);
+               }
+               if(leftar[p]!=-1)
+                q.add(leftar[p]);
+                if(rightar[p]!=-1)
+                  q.add(rightar[p]);
+              }
+             
+             
+             
+         }
+        
+    }
+   static void swap(int a,int b)
+    {
+        int t;
+        t=a;
+        a=b;
+        b=t;
+    }
+}
